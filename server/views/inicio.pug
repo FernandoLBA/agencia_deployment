@@ -1,0 +1,39 @@
+//- h1 Agencia de Viajes
+//- para no tener que repetir código en distintas páginas, se usará una página maestra.
+
+//- para usar la página maestra se extiende desde ella
+extends ./layout/index
+
+block slider
+     .slider 
+          h1 Río de Janeiro 
+          em aventura
+
+//- luego se llama el bloque(padre) de la página maestra y el contenido (hijo) se indenta
+block contenido 
+     main.container.mt-5 
+          h2.text-center.mb-5 Sobre Nosotros
+          .row.mb-5 
+               .col-md-5 
+                    p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati autem perferendis fugiat repudiandae quasi, non voluptatum architecto, ab quisquam earum laborum qui rem quam voluptas nostrum explicabo id aut aperiam consequatur.
+                    p Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic, id. Unde ducimus veritatis reprehenderit consequuntur facilis repellat non voluptatem, voluptate eaque culpa minus libero asperiores labore.
+               .col-md-6
+                    img(src="/img/inicio_nosotros.jpg", alt="imagen nosotros" class="img-fluid")
+          
+          h2.my-5.text-center próximos viajes
+          include ./layout/bloque_viajes
+     
+     h2.my-5.text-center Obtén un descuento
+     .descuento
+          .container 
+               .row      
+                    .col-md-6 
+                         .contenido 
+                              h3 5% de Descuento 
+                              p.titulo Viaje a Canadá
+                              p.fecha 20 de Marzo de 2022 - 28 de Marzo de 2022
+                              p.precio $2,500 USD
+
+     .container     
+          h2.mt-5.text-center Testimoniales
+          include ./layout/bloque_testimoniales

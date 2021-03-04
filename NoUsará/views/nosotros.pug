@@ -1,0 +1,42 @@
+extends ./layout/index
+
+//- equivaldría a <h1>hola</h1>
+//- <p>desde pug</>, con código pug es así:
+//- p Nosotros
+
+block contenido 
+     main.container.mt-5 
+          .row 
+               .col-md-5 
+                    img(src="./img/nosotros.jpg", alt="imagen sobre nosotros", class="img-fluid")
+               .col-md-7     
+                    h1 #{pagina}
+                    blockquote ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eu odio vitae justo imperdiet accumsan. Ut ac sapien dolor. Morbi varius ligula ac blandit cursus. Integer imperdiet sollicitudin blandit. Curabitur cursus accumsan ligula, nec dignissim metus consequat accumsan. Aliquam et elementum ligula. Nunc elit orci, sodales id urna nec, pellentesque pretium ligula. 
+                    
+                    p Phasellus eu sollicitudin magna. Fusce ultricies dolor pulvinar, dictum dolor ut, fringilla ipsum. Curabitur ut auctor augue. Curabitur aliquet odio id ex congue, eget faucibus libero aliquet. Nulla vitae lobortis est. Sed dapibus purus nec dapibus rhoncus. Praesent quis elit non arcu suscipit posuere.
+
+                    p Praesent blandit, dui eu facilisis sagittis, nisl eros rhoncus lacus, ut vestibulum felis mi sed orci. Nam tristique pellentesque ante ac blandit. Morbi in facilisis est. Duis laoreet turpis sit amet nunc scelerisque eleifend. Ut in nulla sodales, volutpat elit vitae, pellentesque quam. Nunc in enim nec mi scelerisque venenatis.
+
+     .listado-iconos 
+          .container.mt-5.py-5.text-center
+               .row 
+                    .col-md-4
+                         img(src="img/icono_seguridad.svg", alt="icono seguridad", class="img-fluid mb-4")
+                         h2.mb-4 Seguridad 
+                         p Duis laoreet turpis sit amet nunc scelerisque eleifend. Ut in nulla sodales, volutpat elit vitae, pellentesque quam. Nunc in enim nec mi scelerisque venenatis.
+                    
+                    .col-md-4
+                         img(src="img/icono_destinos.svg", alt="icono destinos", class="img-fluid mb-4")
+                         h2.mb-4 Mejores Destinos 
+                         p Duis laoreet turpis sit amet nunc scelerisque eleifend. Ut in nulla sodales, volutpat elit vitae, pellentesque quam. Nunc in enim nec mi scelerisque venenatis.
+                    
+                    .col-md-4
+                         img(src="img/icono_precios.svg", alt="icono precios", class="img-fluid mb-4")
+                         h2.mb-4 Los Mejores Precios 
+                         p Duis laoreet turpis sit amet nunc scelerisque eleifend. Ut in nulla sodales, volutpat elit vitae, pellentesque quam. Nunc in enim nec mi scelerisque venenatis.
+
+//- si le colocas por ejemplo al párrafo un signo =, eso quiere decir que espera una variable de javascript que le estemos pasando
+//- p= viajes
+
+//- otra forma de escribirlo es así:
+//- p #{viajes}
