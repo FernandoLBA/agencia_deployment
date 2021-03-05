@@ -4,8 +4,8 @@
   "description": "Primer Proyecto con Node JS",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon server",
-    "start": "node server"
+    "start": "node server",
+    "dev": "nodemon server"
   },
   "type": "module",
   "author": "Fernando Barrios",
