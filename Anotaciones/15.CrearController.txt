@@ -1,0 +1,61 @@
+Crear un controller
+
+EL controller se va a encargar de que información va a mostrar y que vista es la que se va a cargar.
+Vamos a crear controladores, en lugar de tener los res.render en el archivo index de la carpeta routes.
+Esto independizará aún más el código, para que cada vista tenga su propio controller.
+
+1) Crear carpeta controllers en la raiz, y dentro de la carpeta crear un archivo paginasController.js.
+
+2) Cortamos parte del código del index.js de la carpeta routes, para utilizarlo en paginasController.js:
+const paginaInicio = (req, res) => {
+
+     res.render('Inicio', {
+          pagina: 'Inicio'
+     });
+};
+
+const paginaNosotros = (req, res) => {
+     const viajes = 'Viaje a Alemania';
+
+     res.render('Nosotros', {
+          pagina: 'Nosotros'
+     });
+};
+
+const paginaViajes = (req, res) => {
+     res.render('Viajes', {
+          pagina: 'Viajes'
+     });
+};
+
+const paginaTestimoniales = (req, res) => {
+     res.render('Testimoniales', {
+          pagina: 'Testimoniales'
+     });
+};
+
+export {
+     paginaInicio,
+     paginaNosotros,
+     paginaViajes,
+     paginaTestimoniales
+};
+Exportamos cada controller en un objeto.
+
+3) En el index.js de la carpeta routes vamos a importar los controllers de cada vista y colocarlos en el index.js de la carpeta routes:
+import express from 'express';
+import {paginaInicio, paginaNosotros, paginaTestimoniales, paginaViajes} from '../controllers/paginasController.js'
+
+const router = express.Router();
+
+router.get('/', paginaInicio);
+
+router.get('/nosotros', paginaNosotros);
+
+router.get('/viajes', paginaViajes);
+
+router.get('/testimoniales', paginaTestimoniales);
+
+export default router;
+
+Esto también puede hacer creando controller separados de cada vista, le daría aún más independencia, haciendo lo mismo y luego exportando el controller, posteriormente importar el controller en el index.js de routes y listo.

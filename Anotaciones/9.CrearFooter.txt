@@ -1,0 +1,59 @@
+Crear el footer de la web
+
+1) Eliminamos el código de ejemplo del footer si lo hay.
+
+2) Luego escribimos el siguiente código:
+footer.container.py-5 
+     .row 
+          .col-md-6 
+               nav.nav.footer.justify-content-center.justify-content-md-start
+                    a.nav-link(href="/nosotros") Nosotros
+                    a.nav-link(href="/viajes") Viajes
+                    a.nav-link(href="/testimoniales") Testimoniales
+          .col
+               p.copyright.text-center.text-md-right 
+                    |Todos los derechos reservados
+El pipe | se usa como una extensión o conexión del padre por ejemplo, agregamos un p con muchas clases, entonces para no escribir en la misma línea el texto también, usamos el pipe indentado y colocamos el texto.
+
+3) Hemos creado un apartado del copyright, sin embargo es necesario colocarle la fecha como se estila, pero es mejor que esta fecha se agregue de manera dinámica, para hacer esto, vamos a lo siguiente:
+-Vamos al index.js de la raíz, y crearemos otros middleware:
+// requerimos express
+import express from 'express';
+// importamos router
+import router from './routes/index.js'
+
+const app = express();
+
+// Definir puerto
+const port = process.env.PORT || 4000;
+
+// Habilitar PUG
+app.set('view engine', 'pug');
+
+// Obtener el año actual para el copyright <--------------------
+app.use((req, res, next) => {
+     const year = new Date();
+
+     res.locals.ActualYear = year.getFullYear();
+
+     return next();
+})
+
+// Definir la carpeta public
+app.use(express.static('public'));
+
+// Agregar Router
+app.use('/', router);
+
+// Arranca el servidor con el método .listen, le pasa el port y un callback para 
+app.listen(port, () => {
+     console.log(`El servidor está funcionando en el puerto: ${port}`)
+});
+En express se manejan los verbos response, request y next
+res = muestra lo que tu envías
+req = muestra lo que express te envías
+next = ya terminó el código del middleware, vamos al siguiente,
+Se usó next y para forzarlo a ejecutarse, se usa return next();
+
+El objeto res (response) contiene locals, la cual es un objeto que puede almacenar variables internas de express, se pueden agregar nuevos atributos a este, por eso usamos:
+res.locals.nombreQueQuierasVariable

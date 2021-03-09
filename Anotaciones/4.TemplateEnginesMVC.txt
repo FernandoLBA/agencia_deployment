@@ -1,0 +1,33 @@
+Template Engines
+
+Son la V (view) del MVC (model-view-controller), permiten mostrar la parte visual (HTML) en una aplicación express, debido a que el modelo retorna un objeto (O Arreglo) de datos, un template engine permitirá acceder a los resultados de una consulta y mostrarlos en pantalla.
+
+Características:
+-Hay una gran variedad y cada uno tiene su propia sintaxis.
+-Usualmente puedes escribir código javascript dentro del HTML.
+
+Los más comúnes en Node-Express:
+-PUG antes conocido como JADE. (Eel que usaremos)
+     *Instalación:
+     Se instalan vía npm
+     Ejemplo:
+     npm install pug
+     *Se habilita:
+     En el archivo principal
+     Ejemplo:
+     app.set('view engine', 'pug');
+     *Sintáxis:
+     if tareas.length
+          each tarea in tareas
+               li.tarea(fata-tarea=`${tarea.id}`)
+                    p= tarea.tarea
+-EJS embedded javascript
+-HBS handlebars.js (mustache.js)
+-REACT
+
+1) Instalar PUG, como dependencia de producción, porque la requerimos en el servidor, escribir desde consola:
+npm i pug 
+
+2) luego en el index de la carpeta raíz habilitamos pug:
+app.set('view engine', 'pug');
+Usamos view engine porque es soportado por express

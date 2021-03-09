@@ -1,0 +1,44 @@
+Crear página maestra
+
+Esta será una página que servirá como contenedor para las demás páginas, y podrían las demás páginas heredar el header y el footer por ejemplo, sin tener que volver a crearlo en cada página, o si se realiza algún cambio, que afecte a todas y no tener ue cambiar una por una.
+
+1) Crear una carpeta layout dentro de la carpeta views
+
+2) Esta nueva carpeta contendría todo aquello que se replicaría en las demás páginas, como el menú de navegación, el nombre de la empresa, el header completo, el footer, etc.
+
+3) Dentro de layout crearemos un archivo llamado index.pug, este será el archivo principal. 
+
+4) Todo proyecto web empieza con el doctype, podemos escribir dentro del index.pug el siguiente símbolo ! y aparecerá una sugerencia de código como esta !, le damos click o enter y creará automáticamente todo el doctype html pero en pug.
+
+5) Luego a ese documento se le pueden agregar los elementos que se repetirán en todas las páginas, hojas de estilos css, librerías css como bootstrap, etc, tal cual un archivo index.html, por ejemplo agregar al body el título de la página:
+doctype html
+html(lang="en")
+     head
+          meta(charset="UTF-8")
+          meta(http-equiv="X-UA-Compatible", content="IE=edge")
+          meta(name="viewport", content="width=device-width, initial-scale=1.0")
+          title Document
+     body 
+          h1 Agencia de Viajes
+Por lo tanto a las demás vistas ya se les puede remover el título h1 ya que en esta página maestra podrán heredar sus características y elementos.
+
+6) Cuando quieres inyectar contenido de otras vistas o bloques de información, PUG trabaja con block:
+html(lang="en")
+     head
+          meta(charset="UTF-8")
+          meta(http-equiv="X-UA-Compatible", content="IE=edge")
+          meta(name="viewport", content="width=device-width, initial-scale=1.0")
+          title Document
+     body 
+          h1 Agencia de Viajes
+          block contenido
+
+7) Pasar el contenido de una vista a una página maestra, en la página inicio por ejemplo, deberemos colocar:
+extends ./layout/index
+Luego el contenido del block indentado
+block contenido
+     p Inicio
+Esto se puede hacer con cada vista en la cual queramos tener estos elementos heredados de la página maestra index.
+
+
+

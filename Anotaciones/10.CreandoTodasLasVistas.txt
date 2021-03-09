@@ -1,0 +1,109 @@
+Crear todas las vistas
+
+1) Abrimos el index.js de la carpeta routes, allí vamos a gregar un objeto con el nombre de la página, la cual se pasará a la vista correspondiente, mediante estte código:
+import express from 'express';
+
+const router = express.Router();
+
+router.get('/', (req, res) => {
+
+     res.render('Inicio', {
+          pagina: 'Inicio'
+     });
+});
+
+router.get('/nosotros', (req, res) => {
+     const viajes = 'Viaje a Alemania';
+
+     res.render('Nosotros', {
+          pagina: 'Nosotros'
+     });
+});
+
+router.get('/viajes', (req, res) => {
+     res.render('Viajes', {
+          pagina: 'Viajes'
+     });
+});
+
+router.get('/testimoniales', (req, res) => {
+     res.render('Testimoniales', {
+          pagina: 'Testimoniales'
+     });
+});
+
+export default router;
+
+2) Abrimos la vista de inicio.pug
+
+3) Agregamos el siguiente código:
+extends ./layout/index
+
+//- este contenido se inyectará en la página maestra, es importante la indentación de los elementos que contendrá el block contenido.
+block contenido
+     main.container.mt-5 
+          .row 
+               h1= pagina
+Acá se le está pasando el atributo pagina del objeto creado en el index de routes.
+Las variables se puedes agregar de estas formas:
+elemento= variable
+elemento #{variable}
+
+4) En el index.js de la raíz, agregaremos al middleware del año, el nombre del sitio:
+// requerimos express
+import express from 'express';
+// importamos router
+import router from './routes/index.js'
+
+const app = express();
+
+// Definir puerto
+const port = process.env.PORT || 4000;
+
+// Habilitar PUG
+app.set('view engine', 'pug');
+
+// Obtener el año actual para el copyright
+app.use((req, res, next) => {
+     const year = new Date();
+
+     res.locals.ActualYear = year.getFullYear();
+
+     res.locals.NombreSitio = 'Agencia de Viajes';// <----------
+
+     return next();
+})
+
+// Definir la carpeta public
+app.use(express.static('public'));
+
+// Agregar Router
+app.use('/', router);
+
+// Arranca el servidor con el método .listen, le pasa el port y un callback para 
+app.listen(port, () => {
+     console.log(`El servidor está funcionando en el puerto: ${port}`)
+});
+Esto con la finalidad de crear un nombre del sitio dinámico, y poder cambiarlo en cualquier momento.
+
+5) Abrimos el index.pug y le pasamos el nombre de la página y el nombre del sitio al title del html:
+doctype html
+html(lang="en")
+     head
+          meta(charset="UTF-8")
+          meta(http-equiv="X-UA-Compatible", content="IE=edge")
+          meta(name="viewport", content="width=device-width, initial-scale=1.0")
+          //- colocamos la variable NombreSitio y pagina para que se agreguen diamicamente
+          title #{NombreSitio} | #{pagina}
+          //- colocamos aquí archivos estáticos
+          //- fuentes de google
+          link(rel='preconnect' href='https://fonts.gstatic.com')
+          link(href='https://fonts.googleapis.com/css2?family=Staatliches&display=swap' rel='stylesheet')
+          //- hojas de estilos
+          link(rel="stylesheet", href="/css/bootstrap.css")
+          link(rel="stylesheet", href="/css/style.css")
+
+     body 
+          include header
+          block contenido
+          include footer
